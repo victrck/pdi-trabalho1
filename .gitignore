@@ -128,3 +128,28 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+bin/wheel3.8
+bin/wheel3
+bin/wheel-3.8
+bin/python3.8
+bin/python
+bin/pip3.8
+bin/pip-3.8
+bin/f2py3.8
+bin/f2py3
+bin/f2py
+bin/deactivate.nu
+bin/blackd
+bin/activate.ps1
+bin/activate.nu
+bin/activate.fish
+bin/activate.csh
+bin/activate_this.py
+bin/activate
+pyvenv.cfg
+bin/black
+bin/black-primer
+bin/pip
+bin/pip3
+bin/python3
+bin/wheel
