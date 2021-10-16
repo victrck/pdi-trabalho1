@@ -7,39 +7,44 @@ img = cv2.imread("img.jpg")
 img2 = cv2.imread("img2.jpg")
 
 
-def transformation_views(img):
-    plt.imshow(img)
-    plt.show()
+def show_hist(img):
     h = cv2.calcHist([img], [0], None, [256], [0, 256])
     plt.figure()
     plt.title("Histograma")
     plt.xlabel("Intensidade")
-    plt.ylabel("Qtde de Pixels")
+    plt.ylabel("Número de Pixels")
     plt.plot(h)
     plt.xlim([0, 256])
+    plt.show()
+
+
+def transformation_views(img):
+    plt.imshow(img)
+    plt.show()
+    show_hist(img)
+
+
+def hist_colors(img):
+    chanels = cv2.split(img)
+    c = ("b", "g", "r")
+    plt.figure()
+    plt.title("Histograma Colorido")
+    plt.xlabel("Intensidade")
+    plt.ylabel("Número de Pixels")
+    for (canal, cor) in zip(chanels, c):
+        hist = cv2.calcHist([canal], [0], None, [256], [0, 256])
+        plt.plot(hist, color=cor)
+        plt.xlim([0, 256])
     plt.show()
 
 
 def hist_equalizer(img):
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     h_eq = cv2.equalizeHist(img)
-    plt.figure()
-    plt.title("Histograma Equalizado")
-    plt.xlabel("Intensidade")
-    plt.ylabel("Qtde de Pixels")
-    plt.hist(h_eq.ravel(), 256, [0,256])
-    plt.xlim([0, 256])
-    plt.show()
-    plt.figure()
-    plt.title("Histograma Original")
-    plt.xlabel("Intensidade")
-    plt.ylabel("Qtde de Pixels")
-    plt.hist(img.ravel(), 256, [0,256])
-    plt.xlim([0, 256])
-    plt.show()
-    
-    
-    
+    show_hist(h_eq)
+    show_hist(img)
+
+
 def modelsandfilters_view(new_img, img):
     try:
         (h, s, v) = cv2.split(new_img)
@@ -111,7 +116,7 @@ def main_menu():
                 2 - Opções relacionadas a Histograma\n \
                 3 - Modelos de cor e Filtros Espaciais\n \
                 Opção:"
-                )
+    )
     return op
 
 
@@ -125,7 +130,7 @@ def menu_filtersandmodels(img):
                 5 - filtro da media\n \
                 6 - filtro da media ponderada\n \
                 Opção:"
-                )
+    )
     if op == "1":
         rgb_to_hsv(img)
     elif op == "2":
@@ -147,14 +152,15 @@ def transfor_menu(img):
                 2 - Aplicar Transformações Exponencial\n \
                 3 - Aplicar Transformações Inversa\n \
                 Opção:"
-                )
+    )
     if op == "1":
         log_transformation(img)
     elif op == "2":
         expo_transformation(img)
     elif op == "3":
         inv_transformation(img)
-        
+
+
 def hist_menu(img, img2):
     op = input(
         "Escolha uma opcao: \n \
@@ -163,10 +169,10 @@ def hist_menu(img, img2):
                 3 - Especificar\n \
                 4 - Comparar\n \
                 Opção:"
-                )
+    )
     if op == "1":
         transformation_views(img)
-        transformation_views(img2)
+        hist_colors(img2)
     elif op == "2":
         hist_equalizer(img)
         hist_equalizer(img2)
@@ -176,14 +182,13 @@ def hist_menu(img, img2):
         transfor_menu(img)
         transformation_views(img)
         hist_equalizer(img)
-        
-        
+
 
 op = main_menu()
-system('clear')
+system("clear")
 if op == "1":
     transfor_menu(img)
 elif op == "2":
-    hist_menu(img,img2)
+    hist_menu(img, img2)
 elif op == "3":
     menu_filtersandmodels(img2)
