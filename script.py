@@ -20,6 +20,26 @@ def transformation_views(img):
     plt.show()
 
 
+def hist_equalizer(img):
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    h_eq = cv2.equalizeHist(img)
+    plt.figure()
+    plt.title("Histograma Equalizado")
+    plt.xlabel("Intensidade")
+    plt.ylabel("Qtde de Pixels")
+    plt.hist(h_eq.ravel(), 256, [0,256])
+    plt.xlim([0, 256])
+    plt.show()
+    plt.figure()
+    plt.title("Histograma Original")
+    plt.xlabel("Intensidade")
+    plt.ylabel("Qtde de Pixels")
+    plt.hist(img.ravel(), 256, [0,256])
+    plt.xlim([0, 256])
+    plt.show()
+    
+    
+    
 def modelsandfilters_view(new_img, img):
     try:
         (h, s, v) = cv2.split(new_img)
@@ -134,13 +154,37 @@ def transfor_menu(img):
         expo_transformation(img)
     elif op == "3":
         inv_transformation(img)
-
-
-op = main_menu()
-system('clear')
-if op == "1":
-    transfor_menu(img)
-elif op == "2":
-    pass
-elif op == "3":
-    menu_filtersandmodels(img2)
+        
+def hist_menu(img, img2):
+    op = input(
+        "Escolha uma opcao: \n \
+                1 - Exibir\n \
+                2 - Equalizar\n \
+                3 - Especificar\n \
+                4 - Comparar\n \
+                Opção:"
+                )
+    if op == "1":
+        transformation_views(img)
+        transformation_views(img2)
+    elif op == "2":
+        hist_equalizer(img)
+        hist_equalizer(img2)
+    elif op == "3":
+        transfor_menu(img)
+    elif op == "4":
+        transfor_menu(img)
+        transformation_views(img)
+        hist_equalizer(img)
+        
+        
+transformation_views(img2)
+transformation_views(img)
+# op = main_menu()
+# system('clear')
+# if op == "1":
+#     transfor_menu(img)
+# elif op == "2":
+#     hist_menu(img,img2)
+# elif op == "3":
+#     menu_filtersandmodels(img2)
