@@ -178,13 +178,12 @@ def hist_menu(img, img2):
         hist_equalizer(img)
         
         
-transformation_views(img2)
-transformation_views(img)
-# op = main_menu()
-# system('clear')
-# if op == "1":
-#     transfor_menu(img)
-# elif op == "2":
-#     hist_menu(img,img2)
-# elif op == "3":
-#     menu_filtersandmodels(img2)
+
+op = main_menu()
+system('clear')
+if op == "1":
+    transfor_menu(img)
+elif op == "2":
+    hist_menu(img,img2)
+elif op == "3":
+    menu_filtersandmodels(img2)
