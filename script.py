@@ -8,6 +8,7 @@ img2 = cv2.imread("img2.jpg")
 
 
 def show_hist(img):
+    
     h = cv2.calcHist([img], [0], None, [256], [0, 256])
     plt.figure()
     plt.title("Histograma")
